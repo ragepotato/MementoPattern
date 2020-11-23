@@ -10,7 +10,7 @@ public class MainDemo extends JFrame{
 
     private JButton saveButton, undoButton, redoButton;
 
-    private JTextArea theState = new JTextArea(5,15);
+    private JTextArea theState = new JTextArea(20,25);
     private JLabel mementoTracker = new JLabel("Current state: ");
 
     // ---------------------------------------------
@@ -36,6 +36,7 @@ public class MainDemo extends JFrame{
 
         panel1.add(mementoTracker);
 
+        theState.setLineWrap(true);
 
         ButtonListener saveListener = new ButtonListener();
         ButtonListener undoListener = new ButtonListener();
@@ -69,10 +70,11 @@ public class MainDemo extends JFrame{
                 originator.setState(textInTextArea);
                 caretaker.add( originator.saveStateToMemento() );
                 String textBoxString = originator.getState();
-                mementoTracker.setText("Current state: " + textBoxString);
-                theState.setText("");
+                theState.setText(textBoxString);
+                mementoTracker.setText("Current state: " + currentIndex);
                 saveFiles++;
                 currentIndex++;
+
                 System.out.println("Save Files " + saveFiles);
                 undoButton.setEnabled(true);
 
@@ -83,7 +85,8 @@ public class MainDemo extends JFrame{
                     currentIndex--;
                     originator.getStateFromMemento(caretaker.get(currentIndex));
                     String textBoxString = originator.getState();
-                    mementoTracker.setText("Current state: " + textBoxString);
+                    theState.setText(textBoxString);
+                    mementoTracker.setText("Current state: " + currentIndex);
                     redoButton.setEnabled(true);
                 } else {
                     undoButton.setEnabled(false);
@@ -98,7 +101,8 @@ public class MainDemo extends JFrame{
                     currentIndex++;
                     originator.getStateFromMemento(caretaker.get(currentIndex));
                     String textBoxString = originator.getState();
-                    mementoTracker.setText("Current state: " + textBoxString);
+                    theState.setText(textBoxString);
+                    mementoTracker.setText("Current state: " + currentIndex);
                     undoButton.setEnabled(true);
                 } else {
                     redoButton.setEnabled(false);
