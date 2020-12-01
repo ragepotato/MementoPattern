@@ -17,7 +17,11 @@ public class MainDemo extends JFrame{
 
     CareTaker caretaker = new CareTaker();
 
-    Originator originator = new Originator();
+
+
+    DocumentOriginator originator = new DocumentOriginator();
+
+
 
     int saveFiles = 0, currentIndex = 0;
 
@@ -68,7 +72,10 @@ public class MainDemo extends JFrame{
             if(e.getSource() == saveButton){
                 String textInTextArea = theState.getText();
                 originator.setState(textInTextArea);
+
                 caretaker.add( originator.saveStateToMemento() );
+
+
                 String textBoxString = originator.getState();
                 theState.setText(textBoxString);
                 mementoTracker.setText("Current state: " + currentIndex);
@@ -115,3 +122,5 @@ public class MainDemo extends JFrame{
     }
 
 }
+
+

@@ -1,4 +1,4 @@
-public class Originator {  //object for which the state is to be saved
+public class DocumentOriginator {  //object for which the state is to be saved
     private String state;
 
     public void setState(String state){
